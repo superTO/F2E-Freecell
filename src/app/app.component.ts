@@ -6,5 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'drag';
+  title = 'Pomodoro-Clock';
+  public break = 0;
+  public session = 0;
+
+  constructor() {}
+
+  public add(value: number) {
+    return ++value;
+  }
+
+  public subtract(value: number){
+    return --value;
+  }
+
 }
