@@ -3,21 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { MainComponent } from './main/main.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FlexLayoutModule,
-
-    // Material
-    MatButtonModule,
-    MatIconModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

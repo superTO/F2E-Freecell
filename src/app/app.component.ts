@@ -7,17 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Pomodoro-Clock';
-  public break = 0;
-  public session = 0;
-
   constructor() {}
-
-  public add(value: number) {
-    return ++value;
-  }
-
-  public subtract(value: number){
-    return --value;
-  }
 
 }

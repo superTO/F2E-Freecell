@@ -5,29 +5,4 @@
   </h1>
 </div>
 
-<div fxLayout="row wrap" fxLayoutAlign="space-around center">
-  <div fxFlex>
-    <h1>Break Time</h1>
-    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
-      <Button mat-fat-button fxflex (click)="subtract(break)">-</Button>
-      <Button mat-fat fxflex (click)="add(break)">+</Button>
-    </div>
-
-
-    <h1>{{ break }}</h1>
-  </div>
-
-  <div fxflex>
-    <h1>Session Time</h1>
-    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
-      <Button fxflex (click)="subtract(break)">-</Button>
-      <Button fxflex (click)="add(break)">+</Button>
-    </div>
-
-    <h1>{{ session }}</h1>
-  </div>
-</div>
-
-
-
 <router-outlet></router-outlet>
