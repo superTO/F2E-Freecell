@@ -1,23 +1,27 @@
-<div fxLayout="row wrap" fxLayoutAlign="center">
-  <div fxFlex>
-    <h1>Break Time</h1>
-    <div>
-      <Button mat-fat-button fxflex (click)="subtract(break)">-</Button>
-      <Button mat-fat fxflex (click)="add(break)">+</Button>
-    </div>
+<h1 class='highlight'>{{ NowTime | async }}</h1>
 
+<div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+  <div fxflex>
+    <h1>Break Time</h1>
+    <div  fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+      <button mat-flat-button color="primary" (click)="subtract(break)">-</button>
+      <button mat-flat-button color="primary" (click)="add(break)">+</button>
+    </div>
 
     <h1>{{ break }}</h1>
   </div>
 
+  <div fxflex></div>
+
   <div fxflex>
     <h1>Session Time</h1>
-    <div>
-      <Button fxflex (click)="subtract(break)">-</Button>
-      <Button fxflex (click)="add(break)">+</Button>
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+      <button mat-flat-button color="primary" (click)="subtract(session)">-</button>
+      <button mat-flat-button color="primary" (click)="add(session)">+</button>
     </div>
 
     <h1>{{ session }}</h1>
   </div>
 </div>
+<!-- <input [(ngModel)]="break">{{break}} -->
 
