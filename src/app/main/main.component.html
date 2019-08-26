@@ -1,27 +1,32 @@
 <h1 class='highlight'>{{ NowTime | async }}</h1>
+<div>
+  <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+    <div fxflex>
+      <h1>Break Time</h1>
+      <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+        <button mat-flat-button color="primary" (click)="subtract(break)">-</button>
+        <button mat-flat-button color="primary" (click)="add(break)">+</button>
+      </div>
 
-<div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-  <div fxflex>
-    <h1>Break Time</h1>
-    <div  fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-      <button mat-flat-button color="primary" (click)="subtract(break)">-</button>
-      <button mat-flat-button color="primary" (click)="add(break)">+</button>
+      <h1>{{ break | async }}</h1>
     </div>
 
-    <h1>{{ break | async }}</h1>
+    <div fxflex></div>
+
+    <div fxflex>
+      <h1>Session Time</h1>
+      <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+        <button mat-flat-button color="primary" (click)="subtract(session)">-</button>
+        <button mat-flat-button color="primary" (click)="add(session)">+</button>
+      </div>
+
+      <h1>{{ session | async }}</h1>
+    </div>
   </div>
 
-  <div fxflex></div>
-
-  <div fxflex>
-    <h1>Session Time</h1>
-    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-      <button mat-flat-button color="primary" (click)="subtract(session)">-</button>
-      <button mat-flat-button color="primary" (click)="add(session)">+</button>
-    </div>
-
-    <h1>{{ session | async }}</h1>
+  <div fxLayout="row wrap" fxLayoutAlign="center center">
+    <button mat-flat-button color="primary" (click)='settime()'>Start</button>&nbsp;
+    <button mat-flat-button color="primary">Cancel</button>
   </div>
 </div>
 <!-- <input [(ngModel)]="break">{{break}} -->
-

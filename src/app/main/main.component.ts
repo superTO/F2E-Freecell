@@ -34,6 +34,11 @@ export class MainComponent implements OnInit {
     let temp = value.getValue();
     temp === 0 ? temp = 0 : value.next(--temp);
   }
+
+  public settime(): void {
+
+  }
+
   ngOnInit() {
   }
 
