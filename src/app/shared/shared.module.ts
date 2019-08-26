@@ -8,7 +8,7 @@ import { MatButtonModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [],
-  imports: [
+  exports: [
     CommonModule,
     FlexLayoutModule,
     FormsModule,
