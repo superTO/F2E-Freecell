@@ -8,7 +8,7 @@
       <button mat-flat-button color="primary" (click)="add(break)">+</button>
     </div>
 
-    <h1>{{ break }}</h1>
+    <h1>{{ break | async }}</h1>
   </div>
 
   <div fxflex></div>
@@ -20,7 +20,7 @@
       <button mat-flat-button color="primary" (click)="add(session)">+</button>
     </div>
 
-    <h1>{{ session }}</h1>
+    <h1>{{ session | async }}</h1>
   </div>
 </div>
 <!-- <input [(ngModel)]="break">{{break}} -->

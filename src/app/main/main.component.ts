@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import * as moment from 'moment';
-import { BehaviorSubject, timer } from 'rxjs';
+import { BehaviorSubject, timer, Observable } from 'rxjs';
 
 
 @Component({
@@ -14,8 +14,8 @@ export class MainComponent implements OnInit {
    public timer = timer(1000, 1000);
   // public NowTime = new Date();
 
-  public break: number;
-  public session: number;
+  public break = new BehaviorSubject<number>(0);
+  public session = new BehaviorSubject<number>(0);
 
   constructor(public ref: ChangeDetectorRef) {
     // setInterval(() => {
@@ -23,19 +23,16 @@ export class MainComponent implements OnInit {
     // }, 500);
     // this.ref.detectChanges();
     this.timer.subscribe(() => this.NowTime.next(moment().format('HH:mm:ss')));
-
-    this.break = 0;
-    this.session = 0;
   }
 
-  public add(value: number): void {
-    console.log(value);
-    ++value;
-    console.log(value);
+  public add(value: BehaviorSubject<number>): void {
+    let temp = value.getValue();
+    value.next(++temp);
   }
 
-  public subtract(value: number): void {
-    --value;
+  public subtract(value: BehaviorSubject<number>): void {
+    let temp = value.getValue();
+    temp === 0 ? temp = 0 : value.next(--temp);
   }
   ngOnInit() {
   }
