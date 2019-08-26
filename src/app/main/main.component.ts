@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   constructor(public ref: ChangeDetectorRef) {
     setInterval(() => {
       this.NowTime.next(moment().format('HH:mm:ss'));
-    }, 1);
+    }, 5000);
     // this.ref.detectChanges();
 
     this.break = 0;
