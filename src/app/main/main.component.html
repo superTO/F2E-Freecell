@@ -4,11 +4,10 @@
     <div fxflex>
       <h1>Break Time</h1>
       <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-        <button mat-flat-button color="primary" (click)="subtract(break)">-</button>
-        <button mat-flat-button color="primary" (click)="add(break)">+</button>
+        <button mat-icon-button (click)="subtract(break)"><mat-icon>remove</mat-icon></button>
+        <h1>{{ break | async }}</h1>
+        <button mat-icon-button (click)="add(break)"><mat-icon>add</mat-icon></button>
       </div>
-
-      <h1>{{ break | async }}</h1>
     </div>
 
     <div fxflex></div>
@@ -16,11 +15,10 @@
     <div fxflex>
       <h1>Session Time</h1>
       <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-        <button mat-flat-button color="primary" (click)="subtract(session)">-</button>
-        <button mat-flat-button color="primary" (click)="add(session)">+</button>
+        <button mat-icon-button (click)="subtract(session)"><mat-icon>remove</mat-icon></button>
+        <h1>{{ session | async }}</h1>
+        <button mat-icon-button (click)="add(session)"><mat-icon>add</mat-icon></button>
       </div>
-
-      <h1>{{ session | async }}</h1>
     </div>
   </div>
 
