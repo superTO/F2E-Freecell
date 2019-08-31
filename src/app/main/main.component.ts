@@ -11,6 +11,9 @@ import { BehaviorSubject, timer, interval } from 'rxjs';
 })
 export class MainComponent implements OnInit {
    public NowTime = new BehaviorSubject<string>(moment().format('HH:mm:ss'));
+   public countTime: moment.Moment;
+   public isBreak = new BehaviorSubject<boolean>(false);
+   public isStart = false;
   // public timer = timer(1000, 1000);
   // public NowTime = new Date();
   public timer = interval(1000);
@@ -28,16 +31,38 @@ export class MainComponent implements OnInit {
 
   public add(value: BehaviorSubject<number>): void {
     let temp = value.getValue();
-    value.next(++temp);
+    temp === 60 ? temp = 60 : value.next(++temp);
   }
 
   public subtract(value: BehaviorSubject<number>): void {
     let temp = value.getValue();
-    temp === 0 ? temp = 0 : value.next(--temp);
+    temp === 1 ? temp = 1 : value.next(--temp);
   }
 
   public settime(): void {
+    this.isStart = true;
+    const start = moment().hours(0).minutes(this.session.getValue()).seconds(0);
+    const end = moment().hours(0).minutes(this.break.getValue()).seconds(0);
 
+    this.countTime = start;
+    this.timer.subscribe(() => {
+      this.countTime.subtract(1, 's');
+      console.log(this.countTime.format('mm:ss'));
+      if (this.countTime.format('mm:ss') === '00:00') {
+        if (this.isBreak.getValue()) {
+          this.countTime = start;
+          this.isBreak.next(false);
+        } else {
+          this.countTime = end;
+          this.isBreak.next(true);
+        }
+      }
+    });
+
+  }
+
+  public cancel(): void {
+    this.isStart = false;
   }
 
   ngOnInit() {

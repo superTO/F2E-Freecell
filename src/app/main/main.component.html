@@ -22,9 +22,19 @@
     </div>
   </div>
 
-  <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <button mat-flat-button color="primary" (click)='settime()'>Start</button>&nbsp;
-    <button mat-flat-button color="primary">Cancel</button>
+  <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!isStart">
+    <button mat-flat-button color="primary" (click)='settime()'>Start</button>
   </div>
+
+  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="isStart">
+    <div fxflex>
+      <button mat-flat-button color="primary" (click)='cancel()'>Cancel</button>
+    </div>
+    <div fxflex>
+      <h1 *ngIf="this.isBreak | async">Break Time</h1>
+      <h1 class='highlight'>{{ countTime.format('mm:ss') }}</h1>
+    </div>
+  </div>
+
 </div>
 <!-- <input [(ngModel)]="break">{{break}} -->
