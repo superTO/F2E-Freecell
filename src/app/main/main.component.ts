@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import * as moment from 'moment';
-import { BehaviorSubject, timer, interval } from 'rxjs';
+import { BehaviorSubject, timer, interval, observable, Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,11 +12,12 @@ import { BehaviorSubject, timer, interval } from 'rxjs';
 export class MainComponent implements OnInit {
    public NowTime = new BehaviorSubject<string>(moment().format('HH:mm:ss'));
    public countTime: moment.Moment;
-   public isBreak = new BehaviorSubject<boolean>(false);
+   public isBreak$ = new BehaviorSubject<boolean>(false);
    public isStart = false;
   // public timer = timer(1000, 1000);
   // public NowTime = new Date();
   public timer = interval(1000);
+  private sub: Subscription;
 
   public break = new BehaviorSubject<number>(5);
   public session = new BehaviorSubject<number>(25);
@@ -45,16 +46,16 @@ export class MainComponent implements OnInit {
     const end = moment().hours(0).minutes(this.break.getValue()).seconds(0);
 
     this.countTime = start;
-    this.timer.subscribe(() => {
+    this.sub = this.timer.subscribe(() => {
       this.countTime.subtract(1, 's');
       console.log(this.countTime.format('mm:ss'));
       if (this.countTime.format('mm:ss') === '00:00') {
-        if (this.isBreak.getValue()) {
+        if (this.isBreak$.getValue()) {
           this.countTime = start;
-          this.isBreak.next(false);
+          this.isBreak$.next(false);
         } else {
           this.countTime = end;
-          this.isBreak.next(true);
+          this.isBreak$.next(true);
         }
       }
     });
@@ -63,6 +64,7 @@ export class MainComponent implements OnInit {
 
   public cancel(): void {
     this.isStart = false;
+    this.sub.unsubscribe();
   }
 
   ngOnInit() {
