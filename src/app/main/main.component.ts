@@ -42,19 +42,20 @@ export class MainComponent implements OnInit {
 
   public settime(): void {
     this.isStart = true;
-    const start = moment().hours(0).minutes(this.session.getValue()).seconds(0);
-    const end = moment().hours(0).minutes(this.break.getValue()).seconds(0);
 
-    this.countTime = start;
+    // const end = moment().hours(0).minutes(this.break.getValue()).seconds(0);
+    // 若用this.countTime = end; 使用this.countTime.subtract() end 會一起被 subtract()
+
+    this.countTime = moment().hours(0).minutes(this.session.getValue()).seconds(0);
     this.sub = this.timer.subscribe(() => {
       this.countTime.subtract(1, 's');
-      console.log(this.countTime.format('mm:ss'));
+      // console.log(start.format('mm:ss'));
       if (this.countTime.format('mm:ss') === '00:00') {
         if (this.isBreak$.getValue()) {
-          this.countTime = start;
+          this.countTime = moment().hours(0).minutes(this.session.getValue()).seconds(0);
           this.isBreak$.next(false);
         } else {
-          this.countTime = end;
+          this.countTime = moment().hours(0).minutes(this.break.getValue()).seconds(0);
           this.isBreak$.next(true);
         }
       }
