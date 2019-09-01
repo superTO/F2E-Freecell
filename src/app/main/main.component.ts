@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
    public countTime: moment.Moment;
    public isBreak$ = new BehaviorSubject<boolean>(false);
    public isStart = false;
+   private voice = new Audio();
   // public timer = timer(1000, 1000);
   // public NowTime = new Date();
   public timer = interval(1000);
@@ -27,6 +28,11 @@ export class MainComponent implements OnInit {
     //   this.NowTime.next(moment().format('HH:mm:ss'));
     // }, 500);
     // this.ref.detectChanges();
+
+    // import Voice
+    this.voice.src = '../../assets/voice/knocking_an_iron_door3.mp3';
+    this.voice.load();
+    // show NowTime
     this.timer.subscribe(() => this.NowTime.next(moment().format('HH:mm:ss')));
   }
 
@@ -51,6 +57,9 @@ export class MainComponent implements OnInit {
       this.countTime.subtract(1, 's');
       // console.log(start.format('mm:ss'));
       if (this.countTime.format('mm:ss') === '00:00') {
+        // play voice
+        this.voice.play();
+
         if (this.isBreak$.getValue()) {
           this.countTime = moment().hours(0).minutes(this.session.getValue()).seconds(0);
           this.isBreak$.next(false);
