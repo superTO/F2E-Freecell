@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import * as moment from 'moment';
-import { BehaviorSubject, timer, interval, observable, Observable, Subscription } from 'rxjs';
-
+import { BehaviorSubject, timer, interval, observable, Observable, Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -19,6 +19,7 @@ export class MainComponent implements OnInit {
   // public NowTime = new Date();
   public timer = interval(1000);
   private sub: Subscription;
+  private unSub = new Subject<boolean>();
 
   public break = new BehaviorSubject<number>(5);
   public session = new BehaviorSubject<number>(25);
@@ -29,6 +30,7 @@ export class MainComponent implements OnInit {
     // }, 500);
     // this.ref.detectChanges();
 
+    this.unSub.next(false);
     // import Voice
     this.voice.src = '../../assets/voice/knocking_an_iron_door3.mp3';
     this.voice.load();
@@ -53,7 +55,8 @@ export class MainComponent implements OnInit {
     // 若用this.countTime = end; 使用this.countTime.subtract() end 會一起被 subtract()
 
     this.countTime = moment().hours(0).minutes(this.session.getValue()).seconds(0);
-    this.sub = this.timer.subscribe(() => {
+    // this.sub =
+     this.timer.pipe(takeUntil(this.unSub)).subscribe(() => {
       this.countTime.subtract(1, 's');
       // console.log(start.format('mm:ss'));
       if (this.countTime.format('mm:ss') === '00:00') {
@@ -74,11 +77,17 @@ export class MainComponent implements OnInit {
 
   public cancel(): void {
     this.isStart = false;
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
+    this.unSub.next(true);
   }
 
   ngOnInit() {
   }
 
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy(): void {
+    this.unSub.next(true);
+    this.unSub.unsubscribe();
+  }
 
 }
