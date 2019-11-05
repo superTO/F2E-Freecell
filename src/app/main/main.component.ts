@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   // public NowTime = new Date();
   public timer = interval(1000);
   private sub: Subscription;
-  private unSub = new Subject<boolean>();
+  private unSub = new Subject();
 
   public break = new BehaviorSubject<number>(5);
   public session = new BehaviorSubject<number>(25);
@@ -30,7 +30,6 @@ export class MainComponent implements OnInit {
     // }, 500);
     // this.ref.detectChanges();
 
-    this.unSub.next(false);
     // import Voice
     this.voice.src = '../../assets/voice/knocking_an_iron_door3.mp3';
     this.voice.load();
@@ -78,7 +77,7 @@ export class MainComponent implements OnInit {
   public cancel(): void {
     this.isStart = false;
     // this.sub.unsubscribe();
-    this.unSub.next(true);
+    this.unSub.next();
   }
 
   ngOnInit() {
@@ -86,7 +85,7 @@ export class MainComponent implements OnInit {
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnDestroy(): void {
-    this.unSub.next(true);
+    this.unSub.next();
     this.unSub.unsubscribe();
   }
 
