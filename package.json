@@ -6,7 +6,7 @@
     "start": "ng serve --open",
     "build": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --dev",
     "build-stats": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --dev --stats-json",
-    "build-prod": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --base-href ./",
+    "build-prod": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --base-href /Pomodoro-Clock/",
     "test": "ng test",
     "lint": "./node_modules/.bin/tslint --project src/tsconfig.app.json",
     "e2e": "ng e2e",
