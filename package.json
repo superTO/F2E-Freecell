@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "./node_modules/.bin/tslint --project src/tsconfig.app.json",
     "e2e": "ng e2e",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npx ngh --dir=dist/Pomodoro-Clock/"
   },
   "private": true,
   "dependencies": {
