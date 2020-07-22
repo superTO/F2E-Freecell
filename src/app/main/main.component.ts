@@ -1,5 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import * as moment from 'moment';
+// in local import 'moment'
+// import * as moment from 'moment';
+// in stackblitz import 'moment'
+import moment from 'moment';
 import { BehaviorSubject, timer, interval, observable, Observable, Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
